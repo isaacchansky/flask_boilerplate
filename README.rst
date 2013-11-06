@@ -10,12 +10,15 @@ https://github.com/sloria/cookiecutter-flask
 Quickstart
 ----------
 
+Assumes use of virtualenv / virtualenvwrapper / autoenv
+http://docs.python-guide.org/en/latest/dev/virtualenvs/
+
 ::
 
-    git clone https://github.com/isaacchansky/flask-boilerplate
-    cd flask-boilerplate
+    git clone https://github.com/isaacchansky/flask_boilerplate
+    cd flask_boilerplate
     pip install -r requirements/dev.txt
-    export FLASK-BOILERPLATE_ENV='dev'
+    export FLASK_BOILERPLATE_ENV='dev'
     python manage.py createdb
     python manage.py runserver
 
@@ -32,12 +35,12 @@ By default, you will have access to ``app``, ``models``, and ``db``.
 Development / Production Environments
 -------------------------------------
 
-Configuration environements are handled through the FLASK-BOILERPLATE_ENV system environment variable.
+Configuration environements are handled through the FLASK_BOILERPLATE_ENV system environment variable.
 
 To switch to the development environment, set ::
 
-    export FLASK-BOILERPLATE_ENV="dev"
+    export FLASK_BOILERPLATE_ENV="dev"
 
 To switch to the production environment, set ::
 
-    export FLASK-BOILERPLATE_ENV="prod"
+    export FLASK_BOILERPLATE_ENV="prod"

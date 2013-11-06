@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 '''Public section, including homepage and signup.'''
 from flask import (Blueprint, request, render_template, flash, url_for,
                     redirect, session)
 from sqlalchemy.exc import IntegrityError
 
-from flask-boilerplate.models import User
-from flask-boilerplate.forms import RegisterForm, LoginForm
-from flask-boilerplate.utils import flash_errors
-from flask-boilerplate.models import db
+from flask_boilerplate.models import User
+from flask_boilerplate.forms import RegisterForm, LoginForm
+from flask_boilerplate.utils import flash_errors
+from flask_boilerplate.models import db
 
 blueprint = Blueprint('public', __name__,
                         static_folder="../static",

@@ -1,15 +1,14 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import os
 import sys
 import subprocess
 from flask.ext.script import Manager, Shell, Server
-from flask-boilerplate import models
-from flask-boilerplate.app import create_app
-from flask-boilerplate.models import db
+from flask_boilerplate import models
+from flask_boilerplate.app import create_app
+from flask_boilerplate.models import db
 
-env = os.environ.get("FLASK-BOILERPLATE_ENV", 'prod')
-app = create_app("flask-boilerplate.settings.{0}Config"
+env = os.environ.get("FLASK_BOILERPLATE_ENV", 'prod')
+app = create_app("flask_boilerplate.settings.{0}Config"
                     .format(env.capitalize()), env)
 
 manager = Manager(app)

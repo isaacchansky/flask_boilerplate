@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 """
 My Flask App models.

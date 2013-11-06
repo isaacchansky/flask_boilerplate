@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 '''Members-only module, typically including the app itself.
 '''
 from flask import Blueprint, render_template
-from flask-boilerplate.utils import login_required
+from flask_boilerplate.utils import login_required
 
 blueprint = Blueprint('member', __name__,
                         static_folder="../static",

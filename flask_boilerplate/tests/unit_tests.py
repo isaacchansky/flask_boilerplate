@@ -7,12 +7,12 @@ except ImportError:
     import sys
     print('nose required. Run "pip install nose".')
 
-from flask-boilerplate.main import create_app
+from flask_boilerplate.main import create_app
 
-class TestFlask-boilerplate(unittest.TestCase):
+class Test_flask_boilerplate(unittest.TestCase):
 
     def setUp(self):
-        app = create_app("flask-boilerplate.settings.DevConfig", 'dev')
+        app = create_app("flask_boilerplate.settings.DevConfig", 'dev')
         app.config['TESTING'] = True
         self.app = app.test_client()
 

@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.assets import Environment
 from webassets.loaders import PythonLoader
 
-from flask-boilerplate import assets
-from flask-boilerplate.models import db
+from flask_boilerplate import assets
+from flask_boilerplate.models import db
 
 assets_env = Environment()
 
@@ -28,7 +27,7 @@ def create_app(config_object, env):
     for name, bundle in assets_loader.load_bundles().iteritems():
         assets_env.register(name, bundle)
     # Register blueprints
-    from flask-boilerplate.modules import public, member
+    from flask_boilerplate.modules import public, member
     app.register_blueprint(public.blueprint)
     app.register_blueprint(member.blueprint)
 

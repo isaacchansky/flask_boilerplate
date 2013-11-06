@@ -1,1 +1,0 @@
-'''Blueprint modules for flask-boilerplate.'''

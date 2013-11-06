@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import os
-from flask-boilerplate import main
+from flask_boilerplate import main
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

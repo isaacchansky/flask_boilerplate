@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from flask.ext.assets import Bundle
 
 common_css = Bundle(
