@@ -14,12 +14,14 @@ class User(db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     passhash = db.Column(db.String, nullable=False)
+    salt = db.Column(db.String, nullable=False)
 
 
-    def __init__(self, username=None, email=None, passhash=None):
+    def __init__(self, username=None, email=None, passhash=None, salt=None):
         self.username = username
         self.email = email
         self.passhash = passhash
+        self.salt = salt
 
     def __repr__(self):
         return '<User "{username}">'.format(username=self.username)

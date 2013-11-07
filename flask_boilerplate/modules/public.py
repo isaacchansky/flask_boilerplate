@@ -7,6 +7,8 @@ from flask_boilerplate.models import User
 from flask_boilerplate.forms import RegisterForm, LoginForm
 from flask_boilerplate.utils import flash_errors, bcrypt
 from flask_boilerplate.models import db
+import os
+import binascii
 
 blueprint = Blueprint('public', __name__,
                         static_folder="../static",
@@ -19,10 +21,12 @@ def home():
     if request.method == 'POST':
 
         u = User.query.filter_by(username=request.form['username']).first()
-        passhash = u.passhash
-        pass_is_valid = bcrypt.check_password_hash(passhash, request.form['password'])
+        if u is None:
+            is_valid = False
+        else:
+            is_valid = bcrypt.check_password_hash(u.passhash, request.form['password']+u.salt)
 
-        if pass_is_valid:
+        if is_valid:
             session['logged_in'] = True
             session['username'] = u.username
             flash("You are logged in.", 'success')
@@ -44,8 +48,10 @@ def logout():
 def register():
     form = RegisterForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
-        passhash = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(form.username.data, form.email.data, passhash)
+        salt = binascii.b2a_hex(os.urandom(32))
+        salted_pass = form.password.data+salt
+        passhash = bcrypt.generate_password_hash(salted_pass)
+        new_user = User(form.username.data, form.email.data, passhash, salt)
         try:
             db.session.add(new_user)
             db.session.commit()
