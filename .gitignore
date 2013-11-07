@@ -46,3 +46,11 @@ docs/_build
 # Virtualenvs
 env
 env*
+
+# generated front end stuff
+common.js
+common.css
+bower_components
+
+# sqlite db
+*.db
