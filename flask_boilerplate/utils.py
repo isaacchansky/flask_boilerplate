@@ -1,6 +1,9 @@
 '''Helper utilities and decorators.'''
 from flask import session, flash, redirect, url_for
+from flaskext.bcrypt import Bcrypt
 from functools import wraps
+
+bcrypt = Bcrypt()
 
 def flash_errors(form):
     '''Flash all errors for a form.'''

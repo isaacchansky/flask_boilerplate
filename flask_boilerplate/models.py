@@ -13,13 +13,13 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    passhash = db.Column(db.String, nullable=False)
 
 
-    def __init__(self, username=None, email=None, password=None):
+    def __init__(self, username=None, email=None, passhash=None):
         self.username = username
         self.email = email
-        self.password = password
+        self.passhash = passhash
 
     def __repr__(self):
         return '<User "{username}">'.format(username=self.username)

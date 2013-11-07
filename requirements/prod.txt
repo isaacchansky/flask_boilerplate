@@ -11,6 +11,10 @@ itsdangerous==0.23
 Flask-SQLAlchemy==1.0
 SQLAlchemy==0.8.2
 
+# Encryption
+Flask-Bcrypt==0.5.2
+py-bcrypt==0.4
+
 # Forms
 Flask-WTF==0.9.2
 WTForms==1.0.4

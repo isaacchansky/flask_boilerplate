@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 
 from flask_boilerplate.models import User
 from flask_boilerplate.forms import RegisterForm, LoginForm
-from flask_boilerplate.utils import flash_errors
+from flask_boilerplate.utils import flash_errors, bcrypt
 from flask_boilerplate.models import db
 
 blueprint = Blueprint('public', __name__,
@@ -17,16 +17,20 @@ blueprint = Blueprint('public', __name__,
 def home():
     form = LoginForm(request.form)
     if request.method == 'POST':
-        u = User.query.filter_by(username=request.form['username'],
-                                password=request.form['password']).first()
-        if u is None:
-            error = 'Invalid username or password.'
-            flash(error, 'warning')
-        else:
+
+        u = User.query.filter_by(username=request.form['username']).first()
+        passhash = u.passhash
+        pass_is_valid = bcrypt.check_password_hash(passhash, request.form['password'])
+
+        if pass_is_valid:
             session['logged_in'] = True
             session['username'] = u.username
             flash("You are logged in.", 'success')
             return redirect(url_for("member.members"))
+        else:
+            error = 'Invalid username or password.'
+            flash(error, 'warning')
+
     return render_template("home.html", form=form)
 
 @blueprint.route('/logout/')
@@ -40,7 +44,8 @@ def logout():
 def register():
     form = RegisterForm(request.form, csrf_enabled=False)
     if form.validate_on_submit():
-        new_user = User(form.username.data, form.email.data, form.password.data)
+        passhash = bcrypt.generate_password_hash(form.password.data)
+        new_user = User(form.username.data, form.email.data, passhash)
         try:
             db.session.add(new_user)
             db.session.commit()

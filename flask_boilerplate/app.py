@@ -6,6 +6,7 @@ from webassets.loaders import PythonLoader
 
 from flask_boilerplate import assets
 from flask_boilerplate.models import db
+from flask_boilerplate.utils import bcrypt
 
 assets_env = Environment()
 
@@ -21,6 +22,8 @@ def create_app(config_object, env):
     app.config['ENV'] = env
     # Initialize SQLAlchemy
     db.init_app(app)
+    # Register bcrypt
+    bcrypt.init_app(app)
     # Register asset bundles
     assets_env.init_app(app)
     assets_loader = PythonLoader(assets)
